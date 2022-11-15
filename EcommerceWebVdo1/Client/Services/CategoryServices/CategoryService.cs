@@ -1,19 +1,20 @@
 ﻿using EcommerceWebVdo1.Shared;
+using System.Net.Http.Json;
 
 namespace EcommerceWebVdo1.Client.Services.CategoryServices
 {
     public class CategoryService : ICategoryService
     {
-        public List<Category> Categories { get; set; } = new List<Category>();
+        private readonly HttpClient _http;
 
-        public void LoadCategories()
+        public List<Category> Categories { get; set; } = new List<Category>();
+        public CategoryService(HttpClient http)
         {
-            Categories = new List<Category>
-            {
-                new Category{Id =1, Name="Video Games", Url="video-games", Icon="aperture"},
-                new Category{Id =2, Name="Movies", Url="movies", Icon="movie"},
-                new Category{Id =3, Name="Novels", Url="novels", Icon="book"}
-            };
+            _http = http;
+        }
+        public async Task LoadCategories()
+        {
+           Categories = await _http.GetFromJsonAsync<List<Category>>("api/Category");
         }
     }
 }

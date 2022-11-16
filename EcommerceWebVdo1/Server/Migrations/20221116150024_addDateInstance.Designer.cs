@@ -4,6 +4,7 @@ using EcommerceWebVdo1.Server.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace EcommerceWebVdo1.Server.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20221116150024_addDateInstance")]
+    partial class addDateInstance
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -67,50 +70,6 @@ namespace EcommerceWebVdo1.Server.Migrations
                             Icon = "book",
                             Name = "Novels",
                             Url = "novels"
-                        });
-                });
-
-            modelBuilder.Entity("EcommerceWebVdo1.Shared.Edition", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Editions");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Name = "PC"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Name = "Xbox"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            Name = "Play Station"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            Name = "E-book"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            Name = "Audio book"
                         });
                 });
 
@@ -268,78 +227,6 @@ namespace EcommerceWebVdo1.Server.Migrations
                         });
                 });
 
-            modelBuilder.Entity("EditionProduct", b =>
-                {
-                    b.Property<int>("EditionsId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("ProductsId")
-                        .HasColumnType("int");
-
-                    b.HasKey("EditionsId", "ProductsId");
-
-                    b.HasIndex("ProductsId");
-
-                    b.ToTable("EditionProduct");
-
-                    b.HasData(
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 1
-                        },
-                        new
-                        {
-                            EditionsId = 3,
-                            ProductsId = 1
-                        },
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            EditionsId = 2,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            EditionsId = 3,
-                            ProductsId = 2
-                        },
-                        new
-                        {
-                            EditionsId = 1,
-                            ProductsId = 3
-                        },
-                        new
-                        {
-                            EditionsId = 2,
-                            ProductsId = 4
-                        },
-                        new
-                        {
-                            EditionsId = 3,
-                            ProductsId = 4
-                        },
-                        new
-                        {
-                            EditionsId = 4,
-                            ProductsId = 7
-                        },
-                        new
-                        {
-                            EditionsId = 5,
-                            ProductsId = 7
-                        },
-                        new
-                        {
-                            EditionsId = 4,
-                            ProductsId = 8
-                        });
-                });
-
             modelBuilder.Entity("EcommerceWebVdo1.Shared.Product", b =>
                 {
                     b.HasOne("EcommerceWebVdo1.Shared.Category", "Category")
@@ -349,21 +236,6 @@ namespace EcommerceWebVdo1.Server.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("EditionProduct", b =>
-                {
-                    b.HasOne("EcommerceWebVdo1.Shared.Edition", null)
-                        .WithMany()
-                        .HasForeignKey("EditionsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("EcommerceWebVdo1.Shared.Product", null)
-                        .WithMany()
-                        .HasForeignKey("ProductsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }

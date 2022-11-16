@@ -1,6 +1,8 @@
+using EcommerceWebVdo1.Server.Data;
 using EcommerceWebVdo1.Server.Services.CategoryService;
 using EcommerceWebVdo1.Server.Services.ProductService;
 using Microsoft.AspNetCore.ResponseCompression;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<ICategoryService , CategoryService>();
 builder.Services.AddScoped<IProductService, ProductService>();
+builder.Services.AddDbContext<DataContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Default")));
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

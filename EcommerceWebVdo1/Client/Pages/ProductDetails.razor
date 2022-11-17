@@ -13,7 +13,7 @@
 				<select class="form-control" @bind="currentEditionId">
 					@foreach (var variant in product.Variants)
 					{
-						<option value="@variant.EditionId">@variant.EditionId</option>
+						<option value="@variant.EditionId">@variant.Edition.Name</option>
 					}
 				</select>
 			</div>

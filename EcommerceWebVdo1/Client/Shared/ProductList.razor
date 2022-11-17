@@ -3,7 +3,7 @@
 <ul class="list-unstyled">
 	@foreach (var product in ProductService.Products)
 	{
-		<nav class="media my-3"> 
+		<li class="media my-3"> 
 			<div class="media-img-wrapper mr-2">
 				<a href="/product/@product.Id">
 					<img class="media-img" src="@product.Image" alt="@product.Title" />
@@ -14,15 +14,11 @@
 					<h4 class="mb-0">@product.Title</h4>
 				</a>
 			<p>@product.Description</p>
-			@if(product.OriginalPrice>product.Price)
-			{
-				<h6 class="text-muted original-price">Rs @product.OriginalPrice </h6>
-			}
 			<h5 class="price">
-				Rs @product.Price
+				@GetPriceText(product)
 			</h5>
 			</div>
-		</nav>
+		</li>
 	}
 </ul>
 
@@ -39,5 +35,19 @@
 
 	public void Dispose(){
 		ProductService.OnChange -= StateHasChanged;
+	}
+	private string GetPriceText(Product product)
+	{
+		var variants = product.Variants;
+		if (variants.Count == 0)
+		{
+			return string.Empty;
+		}
+		else if (variants.Count==1)
+		{
+			return $"${variants[0].Price}";
+		}
+		decimal minPrice = variants.Min(v => v.Price);
+		return $"Starting at ${minPrice}";
 	}
 }

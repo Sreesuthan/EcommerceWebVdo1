@@ -16,11 +16,11 @@ namespace EcommerceWebVdo1.Client.Services.ProductService
         {
             _http = http;
         }
-        public async Task LoadProducts(string categoryUrl =null)
+        public async Task LoadProducts(string categoryUrl)
         {
             if(categoryUrl == null)
             {
-                Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product");
+                Products = await _http.GetFromJsonAsync<List<Product>>("api/Product");
             }
             else
             {

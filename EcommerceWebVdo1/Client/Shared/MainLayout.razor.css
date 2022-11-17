@@ -4,7 +4,7 @@
     flex-direction: column;
 }
 
-main {
+.main {
     flex: 1;
 }
 
@@ -38,7 +38,7 @@ main {
 
 @media (max-width: 640.98px) {
     .top-row:not(.auth) {
-        display: none;
+        /*display: none;*/
     }
 
     .top-row.auth {

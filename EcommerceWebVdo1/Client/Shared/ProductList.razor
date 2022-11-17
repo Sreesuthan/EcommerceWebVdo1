@@ -27,7 +27,7 @@
 	//[Parameter]
 	//public int? CategoryId { get; set; } = null;
 
-	protected override  void OnInitialized()
+	protected override void OnInitialized()
 	{
 		//await ProductService.LoadProducts();
 		ProductService.OnChange += StateHasChanged;
@@ -50,4 +50,5 @@
 		decimal minPrice = variants.Min(v => v.Price);
 		return $"Starting at ${minPrice}";
 	}
+
 }

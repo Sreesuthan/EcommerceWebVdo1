@@ -4,7 +4,7 @@
 @inject ILocalStorageService LocalStorage
 @inject IToastService ToastService
 <div class="views">
-	<i class="oi oi-eye"></i> @product.Views.ToString("0##")
+	<i class="oi oi-eye"></i> @GetViewString() 
 </div>
 <div class="media">
     <div class="media-img-big-wrapper mr-2">
@@ -32,23 +32,28 @@
 			}
 			<h4 class="price">$@GetSelectedVariant().Price</h4>
 		}
+		<EditForm Model="cartItem">
+			<div class="form-group">
+				<InputNumber id="quantity" @bind-Value="cartItem.Quantity" class="form-control" style="width: 70px;"/>
+			</div>
+		</EditForm>
 		<button class="btn btn-primary" @onclick="AddToCart"><i class="oi oi-cart"></i>&nbsp;&nbsp;&nbsp;Add to Cart</button>
 	</div>
 </div>
 
 @code {
 	private Product product=new Product();
+
 	private int currentEditionId = 1;
+
+	private CartItem cartItem = new CartItem { Quantity = 1 };
+
 	[Parameter]
 	public int Id { get; set; }
 
 	protected override async Task OnInitializedAsync()
 	{
-		//if(ProductService.Products == null || ProductService.Products.Count==0)
-		//{
-		//ProductService.LoadProducts();
-		//}
-		product = await ProductService.GetProduct(Id);// Products.FirstOrDefault(p => p.Id == Int32.Parse(Id));
+		product = await ProductService.GetProduct(Id);
 		if(product.Variants.Count>0)
 		{
 			currentEditionId = product.Variants[0].EditionId;
@@ -61,6 +66,25 @@
 	}
 	private async Task AddToCart()
 	{
-		await CartService.AddToCart(GetSelectedVariant());
+		var productVariant=GetSelectedVariant();
+		cartItem.EditionId = productVariant.EditionId;
+		cartItem.EditionName = productVariant.Edition.Name;
+		cartItem.Image = product.Image;
+		cartItem.Price = productVariant.Price;
+		cartItem.ProductId = productVariant.ProductId;
+		cartItem.ProductTitle = product.Title;
+
+		await CartService.AddToCart(cartItem);
+	}
+	private string GetViewString()
+	{
+		if (product.Views > 1000000)
+			return $"{((float)product.Views / 1000000).ToString("#.##")}M";
+		if (product.Views > 100000)
+			return $"{((float)product.Views / 100000).ToString("#")}K";
+		if (product.Views > 1000000)
+			return $"{((float)product.Views / 1000).ToString("#.##")}K";
+
+		return product.Views.ToString("0##");
 	}
 }

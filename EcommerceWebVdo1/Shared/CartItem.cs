@@ -14,5 +14,6 @@ namespace EcommerceWebVdo1.Shared
 		public string EditionName { get; set; } = string.Empty;
 		public decimal Price { get; set; }
 		public string Image { get; set; } = string.Empty;
+		public int Quantity { get; set; }
 	}
 }

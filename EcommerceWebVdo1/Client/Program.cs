@@ -4,6 +4,7 @@ using EcommerceWebVdo1.Client;
 using EcommerceWebVdo1.Client.Services.CartService;
 using EcommerceWebVdo1.Client.Services.CategoryServices;
 using EcommerceWebVdo1.Client.Services.ProductService;
+using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
@@ -17,4 +18,7 @@ builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredToast();
+builder.Services.AddAuthorizationCore();
+builder.Services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
+
 await builder.Build().RunAsync();

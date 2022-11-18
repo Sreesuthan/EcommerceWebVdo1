@@ -6,7 +6,8 @@ namespace EcommerceWebVdo1.Server.Services.ProductService
     {
         Task<List<Product>> GetAllProducts();
         Task<List<Product>> GetProductsByCategory(string categoryUrl);
-        Task<Product> GetProducts(int id);
+        Task<Product> GetProduct(int id);
+        Task<List<Product>> SearchProducts(String searchText);
 
-    }
+	}
 }

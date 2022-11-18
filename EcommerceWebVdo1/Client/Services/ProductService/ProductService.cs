@@ -34,5 +34,10 @@ namespace EcommerceWebVdo1.Client.Services.ProductService
         {
             return await _http.GetFromJsonAsync<Product>($"api/Product/{id}");
         }
-    }
+
+		public async Task<List<Product>> SearchProducts(string SearchText)
+		{
+			return await _http.GetFromJsonAsync<List<Product>>($"api/Product/Search/{SearchText}");
+		}
+	}
 }

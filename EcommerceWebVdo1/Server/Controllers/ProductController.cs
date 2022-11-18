@@ -28,7 +28,12 @@ namespace EcommerceWebVdo1.Server.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Product>> GetProduct(int id)
         {
-            return Ok(await _productService.GetProducts(id));
+            return Ok(await _productService.GetProduct(id));
         }
-    }
+		[HttpGet("Search/{searchText}")]
+		public async Task<ActionResult<List<Product>>> SearchProducts(string searchText)
+		{
+			return Ok(await _productService.SearchProducts(searchText));
+		}
+	}
 }

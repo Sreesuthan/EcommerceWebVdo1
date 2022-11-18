@@ -4,6 +4,7 @@ using EcommerceWebVdo1.Client;
 using EcommerceWebVdo1.Client.Services.CartService;
 using EcommerceWebVdo1.Client.Services.CategoryServices;
 using EcommerceWebVdo1.Client.Services.ProductService;
+using EcommerceWebVdo1.Client.Services.StatsService;
 using Microsoft.AspNetCore.Components.Authorization;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -16,6 +17,7 @@ builder.Services.AddScoped(sp => new HttpClient { BaseAddress = new Uri(builder.
 builder.Services.AddScoped<IProductService, ProductService>();
 builder.Services.AddScoped<ICategoryService, CategoryService>();
 builder.Services.AddScoped<ICartService, CartService>();
+builder.Services.AddScoped<IStatsService, StatsService>();
 builder.Services.AddBlazoredLocalStorage();
 builder.Services.AddBlazoredToast();
 builder.Services.AddAuthorizationCore();

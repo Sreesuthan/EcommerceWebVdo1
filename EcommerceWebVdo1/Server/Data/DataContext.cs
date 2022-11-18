@@ -9,7 +9,8 @@ namespace EcommerceWebVdo1.Server.Data
         public DbSet<Category> Categories { get; set; }
         public DbSet<Product> Products { get; set; }
 		public DbSet<Edition> Editions { get; set; }
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
+		public DbSet<Stats> Stats { get; set; }
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<ProductVariant>()
                 .HasKey(p =>new { p.ProductId, p.EditionId});

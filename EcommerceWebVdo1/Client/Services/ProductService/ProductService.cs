@@ -24,7 +24,7 @@ namespace EcommerceWebVdo1.Client.Services.ProductService
             }
             else
             {
-                Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product/Category{categoryUrl}");
+                Products = await _http.GetFromJsonAsync<List<Product>>($"api/Product/Category/{categoryUrl}");
             }
             
             OnChange.Invoke();  

@@ -33,6 +33,15 @@ a, .btn-link {
 .validation-message {
     color: red;
 }
+.media {
+    display: flex;
+    padding: 6px;
+}
+
+.media-body {
+    flex-grow: 1;
+    padding: 6px;
+}
 .media-img {
     max-height: 200px;
     max-width: 200px;

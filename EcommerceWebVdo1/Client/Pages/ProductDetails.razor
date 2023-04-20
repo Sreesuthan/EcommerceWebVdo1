@@ -28,9 +28,9 @@
 		{
 			@if (GetSelectedVariant().OriginalPrice > GetSelectedVariant().Price)
 			{
-				<h6 class="text-muted original-price">$@GetSelectedVariant().OriginalPrice</h6>
+				<h6 class="text-muted original-price">₹@GetSelectedVariant().OriginalPrice</h6>
 			}
-			<h4 class="price">$@GetSelectedVariant().Price</h4>
+			<h4 class="price">₹@GetSelectedVariant().Price</h4>
 		}
 		<EditForm Model="cartItem">
 			<div class="form-group">

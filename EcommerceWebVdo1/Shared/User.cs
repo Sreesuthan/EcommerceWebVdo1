@@ -10,9 +10,11 @@ namespace EcommerceWebVdo1.Shared
     public class User
     {
         public int Id { get; set; }
-        [Required ]
+        [Required (ErrorMessage = "{0} is a mandatory feild")]
+        [MaxLength(15)]
         public string UserName { get; set; } = string.Empty;
-        [MaxLength(8)]
+        [Required]
+        [StringLength(maximumLength:15 ,MinimumLength =8, ErrorMessage ="The {0} should have {1} maximum characters and {2} minimum characters")]
         public string Password { get; set; } = string.Empty;
     }
 }
